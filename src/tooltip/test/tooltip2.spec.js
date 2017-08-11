@@ -128,7 +128,7 @@ describe('tooltip directive', function() {
 
             var ttipElement = fragment.find('div.tooltip');
             expect(fragment).toHaveOpenTooltips();
-            expect(ttipElement).toHaveClass('left');
+            expect(ttipElement).toHaveClass('tooltip-left');
 
             closeTooltip(fragment.find('span'));
             expect(fragment).not.toHaveOpenTooltips();

@@ -1,4 +1,4 @@
-[uib-tooltip-popup].tooltip.top-left > .tooltip-arrow,
+/*[uib-tooltip-popup].tooltip.top-left > .tooltip-arrow,
 [uib-tooltip-popup].tooltip.top-right > .tooltip-arrow,
 [uib-tooltip-popup].tooltip.bottom-left > .tooltip-arrow,
 [uib-tooltip-popup].tooltip.bottom-right > .tooltip-arrow,
@@ -51,7 +51,7 @@
   left: auto;
   right: auto;
   margin: 0;
-}
+}*/
 
 [uib-popover-popup].popover,
 [uib-popover-html-popup].popover,

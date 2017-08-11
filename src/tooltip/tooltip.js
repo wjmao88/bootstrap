@@ -127,9 +127,10 @@ angular.module('ui.bootstrap.tooltip', ['ui.bootstrap.position', 'ui.bootstrap.s
             'content="' + startSym + 'content' + endSym + '" ') +
           'origin-scope="origScope" ' +
           'class="uib-position-measure ' + prefix + '" ' +
-          'tooltip-animation-class="fade"' +
+          'tooltip-animation-class="fade" ' +
+          'placement-prefix="' + prefix + '" ' +
           'uib-tooltip-classes ' +
-          'ng-class="{ in: isOpen }" ' +
+          'ng-class="{ show: isOpen }" ' +
           '>' +
         '</div>';
 
@@ -496,13 +497,6 @@ angular.module('ui.bootstrap.tooltip', ['ui.bootstrap.position', 'ui.bootstrap.s
               }
             }
 
-            // KeyboardEvent handler to hide the tooltip on Escape key press
-            function hideOnEscapeKey(e) {
-              if (e.which === 27) {
-                hideTooltipBind();
-              }
-            }
-
             var unregisterTriggers = function() {
               triggers.show.forEach(function(trigger) {
                 if (trigger === 'outsideClick') {
@@ -511,7 +505,6 @@ angular.module('ui.bootstrap.tooltip', ['ui.bootstrap.position', 'ui.bootstrap.s
                   element.off(trigger, showTooltipBind);
                   element.off(trigger, toggleTooltipBind);
                 }
-                element.off('keypress', hideOnEscapeKey);
               });
               triggers.hide.forEach(function(trigger) {
                 if (trigger === 'outsideClick') {
@@ -551,7 +544,12 @@ angular.module('ui.bootstrap.tooltip', ['ui.bootstrap.position', 'ui.bootstrap.s
                     element.on(trigger, showTooltipBind);
                     element.on(triggers.hide[idx], hideTooltipBind);
                   }
-                  element.on('keypress', hideOnEscapeKey);
+
+                  element.on('keypress', function(e) {
+                    if (e.which === 27) {
+                      hideTooltipBind();
+                    }
+                  });
                 });
               }
             }
@@ -670,7 +668,7 @@ function ($animate, $sce, $compile, $templateRequest) {
         // // There are no top-left etc... classes
         // // in TWBS, so we need the primary position.
         var position = $uibPosition.parsePlacement(scope.placement);
-        element.addClass(position[0]);
+        element.addClass(attrs.placementPrefix + '-' + position[0]);
       }
 
       if (scope.popupClass) {

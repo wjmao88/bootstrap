@@ -419,6 +419,10 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
         var appendToElement = modal.appendTo,
             currBackdropIndex = backdropIndex();
 
+        if (!appendToElement.length) {
+          throw new Error('appendTo element not found. Make sure that the element passed is in DOM.');
+        }
+
         if (currBackdropIndex >= 0 && !backdropDomEl) {
           backdropScope = $rootScope.$new(true);
           backdropScope.modalOptions = modal;
@@ -428,7 +432,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
             'class': 'modal-backdrop',
             'ng-style': '{\'z-index\': 1040 + (index && 1 || 0) + index*10}',
             'uib-modal-animation-class': 'fade',
-            'modal-in-class': 'in'
+            'modal-in-class': 'show'
           });
           if (modal.backdropClass) {
             backdropDomEl.addClass(modal.backdropClass);
@@ -477,7 +481,7 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
           'ng-style': '{\'z-index\': 1050 + $$topModalIndex*10, display: \'block\'}',
           'tabindex': -1,
           'uib-modal-animation-class': 'fade',
-          'modal-in-class': 'in'
+          'modal-in-class': 'show'
         }).append(content);
         if (modal.windowClass) {
           angularDomEl.addClass(modal.windowClass);
@@ -694,10 +698,6 @@ angular.module('ui.bootstrap.modal', ['ui.bootstrap.multiMap', 'ui.bootstrap.sta
             modalOptions = angular.extend({}, $modalProvider.options, modalOptions);
             modalOptions.resolve = modalOptions.resolve || {};
             modalOptions.appendTo = modalOptions.appendTo || $document.find('body').eq(0);
-
-            if (!modalOptions.appendTo.length) {
-              throw new Error('appendTo element not found. Make sure that the element passed is in DOM.');
-            }
 
             //verify options
             if (!modalOptions.component && !modalOptions.template && !modalOptions.templateUrl) {

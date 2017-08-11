@@ -122,7 +122,6 @@ angular.module('ui.bootstrap.tabs', [])
 .directive('uibTab', ['$parse', function($parse) {
   return {
     require: '^uibTabset',
-    replace: true,
     templateUrl: function(element, attrs) {
       return attrs.templateUrl || 'uib/template/tabs/tab.html';
     },

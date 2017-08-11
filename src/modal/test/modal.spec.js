@@ -296,8 +296,6 @@ describe('$uibModal', function() {
 
   function open(modalOptions, noFlush, noDigest) {
     var modal = $uibModal.open(modalOptions);
-    modal.opened['catch'](angular.noop);
-    modal.result['catch'](angular.noop);
 
     if (!noDigest) {
       $rootScope.$digest();
@@ -1313,16 +1311,16 @@ describe('$uibModal', function() {
         expect($document).toHaveBackdrop();
       });
 
-      it('should contain backdrop in classes on each modal opening', function() {
+      it('should contain backdrop show classes on each modal opening', function() {
         var modal = open({ template: '<div>With backdrop</div>' });
         var backdropEl = $document.find('body > div.modal-backdrop');
-        expect(backdropEl).toHaveClass('in');
+        expect(backdropEl).toHaveClass('show');
 
         dismiss(modal);
 
         modal = open({ template: '<div>With backdrop</div>' });
         backdropEl = $document.find('body > div.modal-backdrop');
-        expect(backdropEl).toHaveClass('in');
+        expect(backdropEl).toHaveClass('show');
 
       });
 
@@ -1614,7 +1612,7 @@ describe('$uibModal', function() {
       var windowEl = $compile('<div uib-modal-window template-url="window.html">content</div>')($rootScope);
       $rootScope.$digest();
 
-      expect(windowEl.html()).toBe('<div ng-transclude="">content</div>');
+      expect(windowEl.html()).toBe('<div ng-transclude=""><span class="ng-scope">content</span></div>');
     }));
   });
 
@@ -1738,19 +1736,16 @@ describe('$uibModal', function() {
           ds[x] = {index: i, deferred: $q.defer(), reject: reject};
 
           var scope = $rootScope.$new();
-          var failed = false;
           scope.index = i;
           open({
             template: '<div>' + i + '</div>',
             scope: scope,
             resolve: {
-              x: function() { return ds[x].deferred.promise['catch'](function () {
-                failed = true;
-              }); }
+              x: function() { return ds[x].deferred.promise; }
             }
           }, true).opened.then(function() {
             expect($uibModalStack.getTop().value.modalScope.index).toEqual(i);
-            if (!failed) { actual += i; }
+            actual += i;
           });
         });
 

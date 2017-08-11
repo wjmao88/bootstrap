@@ -183,7 +183,7 @@ describe('popover', function() {
 
         expect(elmBody.children().length).toBe(2);
         var ttipElement = elmBody.find('div.popover');
-        expect(ttipElement).toHaveClass('left');
+        expect(ttipElement).toHaveClass('popover-left');
       }));
 
     });

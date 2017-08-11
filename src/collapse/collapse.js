@@ -2,6 +2,7 @@ angular.module('ui.bootstrap.collapse', [])
 
   .directive('uibCollapse', ['$animate', '$q', '$parse', '$injector', function($animate, $q, $parse, $injector) {
     var $animateCss = $injector.has('$animateCss') ? $injector.get('$animateCss') : null;
+    var inClass = 'show';
     return {
       link: function(scope, element, attrs) {
         var expandingExpr = $parse(attrs.expanding),
@@ -28,7 +29,7 @@ angular.module('ui.bootstrap.collapse', [])
             cssTo = {height: '0'};
           }
           if (!scope.$eval(attrs.uibCollapse)) {
-            element.addClass('in')
+            element.addClass(inClass)
               .addClass('collapse')
               .attr('aria-expanded', true)
               .attr('aria-hidden', false)
@@ -44,7 +45,7 @@ angular.module('ui.bootstrap.collapse', [])
         }
 
         function expand() {
-          if (element.hasClass('collapse') && element.hasClass('in')) {
+          if (element.hasClass('collapse') && element.hasClass(inClass)) {
             return;
           }
 
@@ -57,7 +58,7 @@ angular.module('ui.bootstrap.collapse', [])
 
               if ($animateCss) {
                 $animateCss(element, {
-                  addClass: 'in',
+                  addClass: inClass,
                   easing: 'ease',
                   css: {
                     overflow: 'hidden'
@@ -65,14 +66,14 @@ angular.module('ui.bootstrap.collapse', [])
                   to: getScrollFromElement(element[0])
                 }).start()['finally'](expandDone);
               } else {
-                $animate.addClass(element, 'in', {
+                $animate.addClass(element, inClass, {
                   css: {
                     overflow: 'hidden'
                   },
                   to: getScrollFromElement(element[0])
                 }).then(expandDone);
               }
-            }, angular.noop);
+            });
         }
 
         function expandDone() {
@@ -83,7 +84,7 @@ angular.module('ui.bootstrap.collapse', [])
         }
 
         function collapse() {
-          if (!element.hasClass('collapse') && !element.hasClass('in')) {
+          if (!element.hasClass('collapse') && !element.hasClass(inClass)) {
             return collapseDone();
           }
 
@@ -103,19 +104,19 @@ angular.module('ui.bootstrap.collapse', [])
 
               if ($animateCss) {
                 $animateCss(element, {
-                  removeClass: 'in',
+                  removeClass: inClass,
                   to: cssTo
                 }).start()['finally'](collapseDone);
               } else {
-                $animate.removeClass(element, 'in', {
+                $animate.removeClass(element, inClass, {
                   to: cssTo
                 }).then(collapseDone);
               }
-            }, angular.noop);
+            });
         }
 
         function collapseDone() {
-          element.css(cssTo); // Required so that collapse works when animation is disabled
+          element.css(css); // Required so that collapse works when animation is disabled
           element.removeClass('collapsing')
             .addClass('collapse');
           collapsedExpr(scope);

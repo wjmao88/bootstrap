@@ -1,9 +1,6 @@
-### UI Bootstrap - [AngularJS](http://angularjs.org/) directives specific to [Bootstrap](http://getbootstrap.com)
+### UI Bootstrap - [AngularJS](http://angularjs.org/) directives specific to [Bootstrap 4](https://v4-alpha.getbootstrap.com/)
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/angular-ui/bootstrap?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](https://secure.travis-ci.org/angular-ui/bootstrap.svg)](http://travis-ci.org/angular-ui/bootstrap)
-[![devDependency Status](https://david-dm.org/angular-ui/bootstrap/dev-status.svg?branch=master)](https://david-dm.org/angular-ui/bootstrap#info=devDependencies)
-[![CDNJS](https://img.shields.io/cdnjs/v/angular-ui-bootstrap.svg)](https://cdnjs.com/libraries/angular-ui-bootstrap/)
+This is a fork of the [original repository](https://github.com/angular-ui/bootstrap) aiming to support Angular 1.x with Bootstrap 4
 
 ### Quick links
 - [Demo](#demo)
@@ -47,34 +44,33 @@ Installation is easy as UI Bootstrap has minimal dependencies - only the Angular
 * UI Bootstrap 0.12.0 is the _last_ version that supports Angular 1.2.x.
 
 ## Bootstrap Requirements
-* UI Bootstrap requires Bootstrap CSS version 3.x or higher and it has been tested with Bootstrap CSS 3.3.6.
-* UI Bootstrap 0.8 is the _last_ version that supports Bootstrap CSS 2.3.x.
+* UI Bootstrap requires Bootstrap CSS version 4.x or higher
 
 #### Install with NPM
 
 ```sh
-$ npm install angular-ui-bootstrap
+$ npm install angular1-ui-bootstrap4
 ```
 
 This will install AngularJS and Bootstrap NPM packages.
 
-#### Install with Bower
+#### ~~Install with Bower~~~
 ```sh
 $ bower install angular-bootstrap
 ```
 
-Note: do not install 'angular-ui-bootstrap'.  A separate repository - [bootstrap-bower](https://github.com/angular-ui/bootstrap-bower) - hosts the compiled javascript file and bower.json.
+~~Note: do not install 'angular-ui-bootstrap'.  A separate repository - [bootstrap-bower](https://github.com/angular-ui/bootstrap-bower) - hosts the compiled javascript file and bower.json.~~
 
-#### Install with NuGet
-To install AngularJS UI Bootstrap, run the following command in the Package Manager Console
+#### ~~Install with NuGet~~
+~~To install AngularJS UI Bootstrap, run the following command in the Package Manager Console~~
 
 ```sh
 PM> Install-Package Angular.UI.Bootstrap
 ```
 
-#### Custom build
+#### ~~Custom build~~
 
-Head over to https://angular-ui.github.io/bootstrap/ and hit the *Custom build* button to create your own custom UI Bootstrap build, just the way you like it.
+~~Head over to https://angular-ui.github.io/bootstrap/ and hit the *Custom build* button to create your own custom UI Bootstrap build, just the way you like it.~~
 
 #### Manual download
 
